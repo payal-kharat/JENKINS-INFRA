@@ -68,7 +68,7 @@ pipeline {
                             export AWS_DEFAULT_REGION="$AWS_REGION"
 
                             terraform plan \
-                                -var-file="environments/${ENVIRONMENT}.tfvars" \
+                                -var-file="env/${ENVIRONMENT}.tfvars" \
                                 -out="tfplan-${ENVIRONMENT}"
                         '''
                     }
