@@ -1,0 +1,118 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'qa', 'uat', 'prod'],
+            description: 'Select the Terraform environment'
+        )
+
+        booleanParam(
+            name: 'APPLY',
+            defaultValue: false,
+            description: 'Apply Terraform changes after plan'
+        )
+    }
+
+    environment {
+        AWS_REGION = 'us-east-1'
+        TF_IN_AUTOMATION = 'true'
+        TF_DIR = 'INFRA'
+         AWS_CRED = 'AWS'
+
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                dir("${TF_DIR}") {
+                    withCredentials([
+                        [$class: 'AmazonWebServicesCredentialsBinding',
+                         credentialsId: ${AWS_CRED}]
+                    ]) {
+                        sh '''
+                            export AWS_DEFAULT_REGION="$AWS_REGION"
+                            terraform init
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Validate') {
+            steps {
+                dir("${TF_DIR}") {
+                    sh '''
+                        terraform fmt -check -recursive
+                        terraform validate
+                    '''
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                dir("${TF_DIR}") {
+                    withCredentials([
+                        [$class: 'AmazonWebServicesCredentialsBinding',
+                         credentialsId: ${AWS_CRED}]
+                    ]) {
+                        sh '''
+                            export AWS_DEFAULT_REGION="$AWS_REGION"
+
+                            terraform plan \
+                                -var-file="environments/${ENVIRONMENT}.tfvars" \
+                                -out="tfplan-${ENVIRONMENT}"
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            when {
+                expression {
+                    return params.APPLY
+                }
+            }
+
+            steps {
+                dir("${TF_DIR}") {
+                    withCredentials([
+                        [$class: 'AmazonWebServicesCredentialsBinding',
+                         credentialsId: ${AWS_CRED}]
+                    ]) {
+                        sh '''
+                            export AWS_DEFAULT_REGION="$AWS_REGION"
+
+                            terraform apply \
+                                "tfplan-${ENVIRONMENT}"
+                        '''
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Terraform pipeline completed successfully for ${params.ENVIRONMENT}"
+        }
+
+        failure {
+            echo "Terraform pipeline failed for ${params.ENVIRONMENT}"
+        }
+
+        always {
+            echo "Terraform environment: ${params.ENVIRONMENT}"
+        }
+    }
+}
