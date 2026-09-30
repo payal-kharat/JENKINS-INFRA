@@ -19,8 +19,7 @@ pipeline {
     environment {
         AWS_REGION = 'us-east-1'
         TF_IN_AUTOMATION = 'true'
-        AWS_CRED  = 'AWS'
-
+        AWS_CRED = 'AWS'
     }
 
     stages {
@@ -36,7 +35,7 @@ pipeline {
                 dir('INFRA') {
                     withCredentials([
                         [$class: 'AmazonWebServicesCredentialsBinding',
-                         credentialsId: ${AWS_CRED}]
+                         credentialsId: 'AWS']
                     ]) {
                         sh '''
                             export AWS_DEFAULT_REGION="$AWS_REGION"
@@ -63,7 +62,7 @@ pipeline {
                 dir('INFRA') {
                     withCredentials([
                         [$class: 'AmazonWebServicesCredentialsBinding',
-                         credentialsId: ${AWS_CRED}]
+                         credentialsId: 'AWS']
                     ]) {
                         sh '''
                             export AWS_DEFAULT_REGION="$AWS_REGION"
@@ -88,7 +87,7 @@ pipeline {
                 dir('INFRA') {
                     withCredentials([
                         [$class: 'AmazonWebServicesCredentialsBinding',
-                         credentialsId: ${AWS_CRED}]
+                         credentialsId: 'AWS']
                     ]) {
                         sh '''
                             export AWS_DEFAULT_REGION="$AWS_REGION"
