@@ -18,7 +18,6 @@ pipeline {
     environment {
         AWS_REGION = 'us-east-1'
         TF_IN_AUTOMATION = 'true'
-        TF_DIR = 'INFRA'
          AWS_CRED = 'AWS'
 
     }
