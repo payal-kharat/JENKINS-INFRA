@@ -19,6 +19,8 @@ pipeline {
     environment {
         AWS_REGION = 'us-east-1'
         TF_IN_AUTOMATION = 'true'
+        AWS_CRED  = 'AWS'
+
     }
 
     stages {
@@ -34,7 +36,7 @@ pipeline {
                 dir('INFRA') {
                     withCredentials([
                         [$class: 'AmazonWebServicesCredentialsBinding',
-                         credentialsId: 'aws-terraform']
+                         credentialsId: ${AWS_CRED}]
                     ]) {
                         sh '''
                             export AWS_DEFAULT_REGION="$AWS_REGION"
@@ -61,7 +63,7 @@ pipeline {
                 dir('INFRA') {
                     withCredentials([
                         [$class: 'AmazonWebServicesCredentialsBinding',
-                         credentialsId: 'aws-terraform']
+                         credentialsId: ${AWS_CRED}]
                     ]) {
                         sh '''
                             export AWS_DEFAULT_REGION="$AWS_REGION"
@@ -86,7 +88,7 @@ pipeline {
                 dir('INFRA') {
                     withCredentials([
                         [$class: 'AmazonWebServicesCredentialsBinding',
-                         credentialsId: 'aws-terraform']
+                         credentialsId: ${AWS_CRED}]
                     ]) {
                         sh '''
                             export AWS_DEFAULT_REGION="$AWS_REGION"
