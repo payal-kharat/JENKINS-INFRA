@@ -190,35 +190,35 @@ variable "BACKEND_ADDRESS" {
   type = string
 }
 
-variable "PG_HOST" {
-  type = string
-}
+# variable "PG_HOST" {
+#   type = string
+# }
 
-variable "PG_DBNAME" {
-  type = string
-}
+# variable "PG_DBNAME" {
+#   type = string
+# }
 
-variable "PG_USER" {
-  type = string
-}
+# variable "PG_USER" {
+#   type = string
+# }
 
-variable "PG_PASSWORD" {
-  type      = string
-  sensitive = true
-}
+# variable "PG_PASSWORD" {
+#   type      = string
+#   sensitive = true
+# }
 
-variable "POSTGRES_DB" {
-  type = string
-}
+# variable "POSTGRES_DB" {
+#   type = string
+# }
 
-variable "POSTGRES_USER" {
-  type = string
-}
+# variable "POSTGRES_USER" {
+#   type = string
+# }
 
-variable "POSTGRES_PASSWORD" {
-  type      = string
-  sensitive = true
-}
+# variable "POSTGRES_PASSWORD" {
+#   type      = string
+#   sensitive = true
+# }
 
 variable "AWS_REGION" {
   type = string
