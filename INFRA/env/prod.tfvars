@@ -34,7 +34,10 @@ log_retention_days = 30
 ecs_cluster_name   = "app-1-prod-cluster"
 container_insights = "enabled"
 
-SERVICE_DISCOVERY_NAMESPACE_NAME = "app1-prod"
+SERVICE_DISCOVERY_NAMESPACE_NAME = "app1-prod.local"
+
+BACKEND_SERVICE_DISCOVERY_NAME = "app1-backend"
+DB_SERVICE_DISCOVERY_NAME      = "app1-db"
 
 ALB_NAME                   = "app-1-prod-alb"
 FRONTEND_TARGET_GROUP_NAME = "app-1-prod-frontend-tg"

@@ -102,6 +102,14 @@ variable "SERVICE_DISCOVERY_NAMESPACE_NAME" {
   type = string
 }
 
+variable "BACKEND_SERVICE_DISCOVERY_NAME" {
+  type = string
+}
+
+variable "DB_SERVICE_DISCOVERY_NAME" {
+  type = string
+}
+
 variable "ALB_NAME" {
   type = string
 }

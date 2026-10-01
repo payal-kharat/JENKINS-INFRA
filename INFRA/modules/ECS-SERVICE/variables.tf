@@ -71,39 +71,27 @@ variable "FRONTEND_CONTAINER_PORT" {
   type = number
 }
 
-variable "SERVICE_DISCOVERY_NAMESPACE_ARN" {
+variable "BACKEND_SERVICE_REGISTRY_ARN" {
   type = string
 }
 
-variable "BACKEND_DISCOVERY_NAME" {
+variable "BACKEND_CONTAINER_NAME" {
   type = string
 }
 
-variable "BACKEND_PORT_NAME" {
-  type = string
-}
-
-variable "BACKEND_CLIENT_ALIAS_DNS_NAME" {
-  type = string
-}
-
-variable "BACKEND_CLIENT_ALIAS_PORT" {
+variable "BACKEND_CONTAINER_PORT" {
   type = number
 }
 
-variable "DB_DISCOVERY_NAME" {
+variable "DB_SERVICE_REGISTRY_ARN" {
   type = string
 }
 
-variable "DB_PORT_NAME" {
+variable "DB_CONTAINER_NAME" {
   type = string
 }
 
-variable "DB_CLIENT_ALIAS_DNS_NAME" {
-  type = string
-}
-
-variable "DB_CLIENT_ALIAS_PORT" {
+variable "DB_CONTAINER_PORT" {
   type = number
 }
 

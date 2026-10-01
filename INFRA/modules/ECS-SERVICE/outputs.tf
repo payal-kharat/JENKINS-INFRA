@@ -3,7 +3,7 @@ output "BACKEND_SERVICE_ID" {
 }
 
 output "BACKEND_SERVICE_ARN" {
-  value = aws_ecs_service.backend.id
+  value = aws_ecs_service.backend.arn
 }
 
 output "BACKEND_SERVICE_NAME" {
@@ -15,7 +15,7 @@ output "FRONTEND_SERVICE_ID" {
 }
 
 output "FRONTEND_SERVICE_ARN" {
-  value = aws_ecs_service.frontend.id
+  value = aws_ecs_service.frontend.arn
 }
 
 output "FRONTEND_SERVICE_NAME" {
@@ -27,7 +27,7 @@ output "DB_SERVICE_ID" {
 }
 
 output "DB_SERVICE_ARN" {
-  value = aws_ecs_service.db.id
+  value = aws_ecs_service.db.arn
 }
 
 output "DB_SERVICE_NAME" {

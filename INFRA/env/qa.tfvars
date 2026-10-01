@@ -35,7 +35,10 @@ ecs_cluster_name   = "app-3-qa-cluster"
 container_insights = "enabled"
 
 
-SERVICE_DISCOVERY_NAMESPACE_NAME = "app3-qa"
+SERVICE_DISCOVERY_NAMESPACE_NAME = "app3-qa.local"
+
+BACKEND_SERVICE_DISCOVERY_NAME = "app3-backend"
+DB_SERVICE_DISCOVERY_NAME      = "app3-db"
 
 ALB_NAME                   = "app-3-qa-alb"
 FRONTEND_TARGET_GROUP_NAME = "app-3-qa-frontend-tg"

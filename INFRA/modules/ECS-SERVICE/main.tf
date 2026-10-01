@@ -13,19 +13,10 @@ resource "aws_ecs_service" "backend" {
     assign_public_ip = false
   }
 
-  service_connect_configuration {
-    enabled   = true
-    namespace = var.SERVICE_DISCOVERY_NAMESPACE_ARN
-
-    service {
-      port_name      = var.BACKEND_PORT_NAME
-      discovery_name = var.BACKEND_DISCOVERY_NAME
-
-      client_alias {
-        dns_name = var.BACKEND_CLIENT_ALIAS_DNS_NAME
-        port     = var.BACKEND_CLIENT_ALIAS_PORT
-      }
-    }
+  service_registries {
+    registry_arn   = var.BACKEND_SERVICE_REGISTRY_ARN
+    container_name = var.BACKEND_CONTAINER_NAME
+    container_port = var.BACKEND_CONTAINER_PORT
   }
 
   tags = {
@@ -56,11 +47,6 @@ resource "aws_ecs_service" "frontend" {
     container_port   = var.FRONTEND_CONTAINER_PORT
   }
 
-  service_connect_configuration {
-    enabled   = true
-    namespace = var.SERVICE_DISCOVERY_NAMESPACE_ARN
-  }
-
   tags = {
     Name        = var.FRONTEND_SERVICE_NAME
     Environment = var.ENVIRONMENT
@@ -83,19 +69,10 @@ resource "aws_ecs_service" "db" {
     assign_public_ip = false
   }
 
-  service_connect_configuration {
-    enabled   = true
-    namespace = var.SERVICE_DISCOVERY_NAMESPACE_ARN
-
-    service {
-      port_name      = var.DB_PORT_NAME
-      discovery_name = var.DB_DISCOVERY_NAME
-
-      client_alias {
-        dns_name = var.DB_CLIENT_ALIAS_DNS_NAME
-        port     = var.DB_CLIENT_ALIAS_PORT
-      }
-    }
+  service_registries {
+    registry_arn   = var.DB_SERVICE_REGISTRY_ARN
+    container_name = var.DB_CONTAINER_NAME
+    container_port = var.DB_CONTAINER_PORT
   }
 
   tags = {
