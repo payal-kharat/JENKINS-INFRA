@@ -198,30 +198,30 @@ variable "BACKEND_ADDRESS" {
   type = string
 }
 
-# variable "PG_HOST" {
+# variable "MYSQL_DATABASE" {
 #   type = string
 # }
 
-# variable "PG_DBNAME" {
-#   type = string
-# }
+variable "MYSQL_PASSWORD" {
+  type = string
+}
 
-# variable "PG_USER" {
-#   type = string
-# }
+variable "MYSQL_HOST" {
+  type = string
+}
 
-# variable "PG_PASSWORD" {
-#   type      = string
-#   sensitive = true
-# }
+variable "MYSQL_USER" {
+  type      = string
+  sensitive = true
+}
 
-# variable "POSTGRES_DB" {
-#   type = string
-# }
+variable "MYSQL_ROOT_PASSWORD" {
+  type = string
+}
 
-# variable "POSTGRES_USER" {
-#   type = string
-# }
+variable "MYSQL_DATABASE" {
+  type = string
+}
 
 # variable "POSTGRES_PASSWORD" {
 #   type      = string
