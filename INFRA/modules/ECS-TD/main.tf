@@ -23,28 +23,28 @@ resource "aws_ecs_task_definition" "backend" {
         }
       ]
 
-      environment = [
-        {
-          name  = "ADDRESS"
-          value = var.BACKEND_ADDRESS
-        },
-        {
-          name  = "PG_HOST"
-          value = var.PG_HOST
-        },
-        {
-          name  = "PG_DBNAME"
-          value = var.PG_DBNAME
-        },
-        {
-          name  = "PG_USER"
-          value = var.PG_USER
-        },
-        {
-          name  = "PG_PASSWORD"
-          value = var.PG_PASSWORD
-        }
-      ]
+      # environment = [
+      #   {
+      #     name  = "ADDRESS"
+      #     value = var.BACKEND_ADDRESS
+      #   },
+      #   {
+      #     name  = "PG_HOST"
+      #     value = var.PG_HOST
+      #   },
+      #   {
+      #     name  = "PG_DBNAME"
+      #     value = var.PG_DBNAME
+      #   },
+      #   {
+      #     name  = "PG_USER"
+      #     value = var.PG_USER
+      #   },
+      #   {
+      #     name  = "PG_PASSWORD"
+      #     value = var.PG_PASSWORD
+      #   }
+      # ]
 
       logConfiguration = {
         logDriver = "awslogs"
@@ -122,20 +122,20 @@ resource "aws_ecs_task_definition" "db" {
         }
       ]
 
-      environment = [
-        {
-          name  = "POSTGRES_DB"
-          value = var.POSTGRES_DB
-        },
-        {
-          name  = "POSTGRES_USER"
-          value = var.POSTGRES_USER
-        },
-        {
-          name  = "POSTGRES_PASSWORD"
-          value = var.POSTGRES_PASSWORD
-        }
-      ]
+      # environment = [
+      #   {
+      #     name  = "POSTGRES_DB"
+      #     value = var.POSTGRES_DB
+      #   },
+      #   {
+      #     name  = "POSTGRES_USER"
+      #     value = var.POSTGRES_USER
+      #   },
+      #   {
+      #     name  = "POSTGRES_PASSWORD"
+      #     value = var.POSTGRES_PASSWORD
+      #   }
+      # ]
 
       logConfiguration = {
         logDriver = "awslogs"
