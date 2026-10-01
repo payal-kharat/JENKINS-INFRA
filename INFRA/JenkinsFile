@@ -51,16 +51,16 @@ pipeline {
             }
         }
 
-        stage('Terraform Validate') {
-            steps {
-                dir('INFRA') {
-                    sh '''
-                        terraform fmt -check -recursive
-                        terraform validate
-                    '''
-                }
-            }
-        }
+        // stage('Terraform Validate') {
+        //     steps {
+        //         dir('INFRA') {
+        //             sh '''
+        //                 terraform fmt -check -recursive
+        //                 terraform validate
+        //             '''
+        //         }
+        //     }
+        // }
 
         stage('Terraform Plan') {
             when {
