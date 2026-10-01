@@ -38,12 +38,12 @@ SERVICE_DISCOVERY_NAMESPACE_NAME = "app1-uat.local"
 
 BACKEND_SERVICE_DISCOVERY_NAME = "app1-backend"
 DB_SERVICE_DISCOVERY_NAME      = "app1-db"
-ALB_NAME                   = "app-1-uat-alb"
-FRONTEND_TARGET_GROUP_NAME = "app-1-uat-frontend-tg"
-ALB_LISTENER_PORT          = 80
-FRONTEND_CONTAINER_PORT    = 80
-HEALTH_CHECK_PATH          = "/"
-HEALTH_CHECK_PORT          = "traffic-port"
+ALB_NAME                       = "app-1-uat-alb"
+FRONTEND_TARGET_GROUP_NAME     = "app-1-uat-frontend-tg"
+ALB_LISTENER_PORT              = 80
+FRONTEND_CONTAINER_PORT        = 80
+HEALTH_CHECK_PATH              = "/"
+HEALTH_CHECK_PORT              = "traffic-port"
 
 AWS_REGION = "us-east-1"
 
@@ -96,6 +96,5 @@ DB_DISCOVERY_NAME        = "app1-db"
 DB_PORT_NAME             = "db"
 DB_CLIENT_ALIAS_DNS_NAME = "app1-db"
 DB_CLIENT_ALIAS_PORT     = 5432
-
-ENABLE_EXECUTE_COMMAND = true
+ENABLE_EXECUTE_COMMAND   = true
 
