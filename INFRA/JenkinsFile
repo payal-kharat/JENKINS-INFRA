@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -13,6 +12,12 @@ pipeline {
             name: 'APPLY',
             defaultValue: false,
             description: 'Apply Terraform changes after plan'
+        )
+
+        booleanParam(
+            name: 'DESTROY',
+            defaultValue: false,
+            description: 'Destroy all Terraform resources for the selected environment'
         )
     }
 
@@ -58,6 +63,12 @@ pipeline {
         }
 
         stage('Terraform Plan') {
+            when {
+                expression {
+                    return !params.DESTROY
+                }
+            }
+
             steps {
                 dir('INFRA') {
                     withCredentials([
@@ -68,7 +79,7 @@ pipeline {
                             export AWS_DEFAULT_REGION="$AWS_REGION"
 
                             terraform plan \
-                                -var-file="env/${ENVIRONMENT}.tfvars" \
+                                -var-file="environments/${ENVIRONMENT}.tfvars" \
                                 -out="tfplan-${ENVIRONMENT}"
                         '''
                     }
@@ -79,7 +90,7 @@ pipeline {
         stage('Terraform Apply') {
             when {
                 expression {
-                    return params.APPLY
+                    return params.APPLY && !params.DESTROY
                 }
             }
 
@@ -94,6 +105,40 @@ pipeline {
 
                             terraform apply \
                                 "tfplan-${ENVIRONMENT}"
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Destroy') {
+            when {
+                expression {
+                    return params.DESTROY
+                }
+            }
+
+            steps {
+                dir('INFRA') {
+                    withCredentials([
+                        [$class: 'AmazonWebServicesCredentialsBinding',
+                         credentialsId: 'AWS']
+                    ]) {
+                        sh '''
+                            export AWS_DEFAULT_REGION="$AWS_REGION"
+
+                            echo "=========================================="
+                            echo "WARNING: Terraform DESTROY"
+                            echo "Environment: ${ENVIRONMENT}"
+                            echo "=========================================="
+
+                            terraform plan \
+                                -destroy \
+                                -var-file="environments/${ENVIRONMENT}.tfvars" \
+                                -out="destroy-${ENVIRONMENT}"
+
+                            terraform apply \
+                                "destroy-${ENVIRONMENT}"
                         '''
                     }
                 }
@@ -115,4 +160,3 @@ pipeline {
         }
     }
 }
-
