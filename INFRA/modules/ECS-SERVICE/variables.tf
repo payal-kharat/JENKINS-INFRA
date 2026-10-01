@@ -79,9 +79,7 @@ variable "BACKEND_CONTAINER_NAME" {
   type = string
 }
 
-variable "BACKEND_CONTAINER_PORT" {
-  type = number
-}
+
 
 variable "DB_SERVICE_REGISTRY_ARN" {
   type = string
@@ -91,9 +89,7 @@ variable "DB_CONTAINER_NAME" {
   type = string
 }
 
-variable "DB_CONTAINER_PORT" {
-  type = number
-}
+
 
 variable "ENABLE_EXECUTE_COMMAND" {
   type = bool

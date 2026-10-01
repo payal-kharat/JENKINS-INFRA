@@ -16,7 +16,7 @@ resource "aws_ecs_service" "backend" {
   service_registries {
     registry_arn   = var.BACKEND_SERVICE_REGISTRY_ARN
     container_name = var.BACKEND_CONTAINER_NAME
-    container_port = var.BACKEND_CONTAINER_PORT
+    
   }
 
   tags = {
@@ -72,7 +72,7 @@ resource "aws_ecs_service" "db" {
   service_registries {
     registry_arn   = var.DB_SERVICE_REGISTRY_ARN
     container_name = var.DB_CONTAINER_NAME
-    container_port = var.DB_CONTAINER_PORT
+    
   }
 
   tags = {
