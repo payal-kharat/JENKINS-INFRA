@@ -182,13 +182,17 @@ variable "DB_MEMORY" {
   type = number
 }
 
-
+variable "BACKEND_CONTAINER_PORT" {
+  type = number
+}
 
 variable "FRONTEND_CONT_PORT" {
   type = number
 }
 
-
+variable "DB_CONTAINER_PORT" {
+  type = number
+}
 
 variable "BACKEND_ADDRESS" {
   type = string
