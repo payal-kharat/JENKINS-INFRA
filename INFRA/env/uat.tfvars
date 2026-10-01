@@ -68,14 +68,14 @@ DB_CONTAINER_PORT      = 5432
 
 BACKEND_ADDRESS = "0.0.0.0:8000"
 
-PG_HOST     = "app1-db"
-PG_DBNAME   = "app1"
-PG_USER     = "postgres"
-PG_PASSWORD = "CHANGE_ME"
+# PG_HOST     = "app1-db"
+# PG_DBNAME   = "app1"
+# PG_USER     = "postgres"
+# PG_PASSWORD = "CHANGE_ME"
 
-POSTGRES_DB       = "app1"
-POSTGRES_USER     = "postgres"
-POSTGRES_PASSWORD = "CHANGE_ME"
+# POSTGRES_DB       = "app1"
+# POSTGRES_USER     = "postgres"
+# POSTGRES_PASSWORD = "CHANGE_ME"
 
 BACKEND_SERVICE_NAME  = "app-1-uat-backend-service"
 FRONTEND_SERVICE_NAME = "app-1-uat-frontend-service"
