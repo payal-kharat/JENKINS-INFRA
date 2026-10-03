@@ -70,15 +70,15 @@ BACKEND_CONTAINER_PORT = 8080
 FRONTEND_CONT_PORT     = 80
 DB_CONTAINER_PORT      = 3306
 
-BACKEND_ADDRESS = "0.0.0.0:8000"
+BACKEND_ADDRESS = "0.0.0.0:8080"
 
-# PG_HOST     = "app3-db"
-# PG_DBNAME   = "app1"
-# PG_USER     = "postgres"
+MYSQL_PASSWORD     = "rootpassword"
+MYSQL_HOST         = "app3-db.app3-dev.local"
+MYSQL_USER         = "root"
 # PG_PASSWORD = "CHANGE_ME"
 
-# POSTGRES_DB       = "app1"
-# POSTGRES_USER     = "postgres"
+MYSQL_DATABASE          = "example"
+MYSQL_ROOT_PASSWORD     = "rootpassword"
 # POSTGRES_PASSWORD = "CHANGE_ME"
 
 BACKEND_SERVICE_NAME  = "app-3-qa-backend-service"

@@ -4,16 +4,13 @@ resource "aws_ecs_task_definition" "backend" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.BACKEND_CPU
   memory                   = var.BACKEND_MEMORY
-
   execution_role_arn = var.ECS_EXECUTION_ROLE_ARN
   task_role_arn      = var.ECS_TASK_ROLE_ARN
-
   container_definitions = jsonencode([
     {
       name      = "backend"
       image     = var.BACKEND_IMAGE_URI
       essential = true
-
       portMappings = [
         {
           name          = "backend"
@@ -22,7 +19,6 @@ resource "aws_ecs_task_definition" "backend" {
           protocol      = "tcp"
         }
       ]
-
       environment = [
         {
           name  = "MYSQL_DATABASE"
@@ -45,7 +41,6 @@ resource "aws_ecs_task_definition" "backend" {
       #     value = var.PG_PASSWORD
       #   }
        ]
-
       logConfiguration = {
         logDriver = "awslogs"
 
@@ -65,16 +60,13 @@ resource "aws_ecs_task_definition" "frontend" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.FRONTEND_CPU
   memory                   = var.FRONTEND_MEMORY
-
   execution_role_arn = var.ECS_EXECUTION_ROLE_ARN
   task_role_arn      = var.ECS_TASK_ROLE_ARN
-
   container_definitions = jsonencode([
     {
       name      = "frontend"
       image     = var.FRONTEND_IMAGE_URI
       essential = true
-
       portMappings = [
         {
           name          = "frontend"
@@ -83,7 +75,6 @@ resource "aws_ecs_task_definition" "frontend" {
           protocol      = "tcp"
         }
       ]
-
       logConfiguration = {
         logDriver = "awslogs"
 
@@ -103,16 +94,13 @@ resource "aws_ecs_task_definition" "db" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.DB_CPU
   memory                   = var.DB_MEMORY
-
   execution_role_arn = var.ECS_EXECUTION_ROLE_ARN
   task_role_arn      = var.ECS_TASK_ROLE_ARN
-
   container_definitions = jsonencode([
     {
       name      = "db"
       image     = var.DB_IMAGE_URI
       essential = true
-
       portMappings = [
         {
           name          = "db"
@@ -121,7 +109,6 @@ resource "aws_ecs_task_definition" "db" {
           protocol      = "tcp"
         }
       ]
-
       environment = [
         {
           name  = "MYSQL_DATABASE"
@@ -139,7 +126,6 @@ resource "aws_ecs_task_definition" "db" {
 
       logConfiguration = {
         logDriver = "awslogs"
-
         options = {
           awslogs-group         = var.DB_LOG_GROUP_NAME
           awslogs-region        = var.AWS_REGION

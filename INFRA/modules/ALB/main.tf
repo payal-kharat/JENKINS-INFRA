@@ -11,14 +11,12 @@ resource "aws_lb" "main" {
     Project     = var.PROJECT_NAME
   }
 }
-
 resource "aws_lb_target_group" "frontend" {
   name        = var.FRONTEND_TARGET_GROUP_NAME
   port        = var.FRONTEND_CONTAINER_PORT
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.VPC_ID
-
   health_check {
     enabled             = true
     path                = var.HEALTH_CHECK_PATH
@@ -30,24 +28,20 @@ resource "aws_lb_target_group" "frontend" {
     interval            = 30
     matcher             = "200"
   }
-
   tags = {
     Name        = var.FRONTEND_TARGET_GROUP_NAME
     Environment = var.ENVIRONMENT
     Project     = var.PROJECT_NAME
   }
 }
-
 resource "aws_lb_listener" "frontend" {
   load_balancer_arn = aws_lb.main.arn
   port              = var.ALB_LISTENER_PORT
   protocol          = "HTTP"
-
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.frontend.arn
   }
-
   tags = {
     Name        = "${var.ALB_NAME}-listener"
     Environment = var.ENVIRONMENT

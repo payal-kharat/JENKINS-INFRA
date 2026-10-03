@@ -60,21 +60,17 @@ resource "aws_ecs_service" "db" {
   task_definition = var.DB_TASK_DEFINITION_ARN
   desired_count   = var.DESIRED_DB_COUNT
   launch_type     = "FARGATE"
-
   enable_execute_command = var.ENABLE_EXECUTE_COMMAND
-
   network_configuration {
     subnets          = var.PRIVATE_SUBNET_IDS
     security_groups  = [var.DB_SECURITY_GROUP_ID]
     assign_public_ip = false
   }
-
   service_registries {
     registry_arn   = var.DB_SERVICE_REGISTRY_ARN
     container_name = var.DB_CONTAINER_NAME
     
   }
-
   tags = {
     Name        = var.DB_SERVICE_NAME
     Environment = var.ENVIRONMENT
