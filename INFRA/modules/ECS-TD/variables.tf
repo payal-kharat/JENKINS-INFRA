@@ -77,12 +77,30 @@ variable "MYSQL_PASSWORD" {
   type      = string
   sensitive = true
 }
-variable "MYSQL_HOST" {
-  type = string
-}
+# variable "MYSQL_HOST" {
+#   type = string
+# }
 variable "MYSQL_USER" {
   type = string
 }
+#emp-backend
+variable "DB_HOST" {
+  type = string
+}
+variable "DB_USER" {
+  type = string
+}
+variable "DB_PORT" {
+  type = string
+}
+variable "DB_PASSWORD" {
+  type = string
+}
+variable "DB_NAME" {
+  type = string
+}
+
+
 
 # variable "POSTGRES_PASSWORD" {
 #   type      = string

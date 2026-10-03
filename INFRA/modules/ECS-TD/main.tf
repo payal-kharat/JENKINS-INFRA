@@ -20,26 +20,46 @@ resource "aws_ecs_task_definition" "backend" {
         }
       ]
       environment = [
-        {
-          name  = "MYSQL_DATABASE"
-          value = var.MYSQL_DATABASE
-        },
-        {
-          name  = "MYSQL_PASSWORD"
-          value = var.MYSQL_PASSWORD
-        },
-        {
-          name  = "MYSQL_HOST"
-          value = var.MYSQL_HOST
-        },
-        {
-          name  = "MYSQL_USER"
-          value = var.MYSQL_USER
-        }
+        # {
+        #   name  = "MYSQL_DATABASE"
+        #   value = var.MYSQL_DATABASE
+        # },
+        # {
+        #   name  = "MYSQL_PASSWORD"
+        #   value = var.MYSQL_PASSWORD
+        # },
+        # {
+        #   name  = "MYSQL_HOST"
+        #   value = var.MYSQL_HOST
+        # },
+        # {
+        #   name  = "MYSQL_USER"
+        #   value = var.MYSQL_USER
+        # }
       #   {
       #     name  = "PG_PASSWORD"
       #     value = var.PG_PASSWORD
       #   }
+      {
+          name = "DB_HOST"
+          value = var.DB_HOST
+        },
+        {
+          name = "DB_PORT"
+          value = var.DB_PORT
+        },
+        {
+          name = "DB_USER"
+          value = var.DB_USER
+        },
+        {
+          name = "DB_PASSWORD"
+          value = var.DB_PASSWORD
+        },
+        {
+          name = "DB_NAME"
+          value = var.DB_NAME
+        }
        ]
       logConfiguration = {
         logDriver = "awslogs"
@@ -117,6 +137,14 @@ resource "aws_ecs_task_definition" "db" {
         {
           name  = "MYSQL_ROOT_PASSWORD"
           value = var.MYSQL_ROOT_PASSWORD
+        },
+        {
+          name = "MYSQL_USER"
+          value = var.MYSQL_USER
+        },
+        {
+          name = "MYSQL_PASSWORD"
+          value = var.MYSQL_PASSWORD
         }
         # {
         #   name  = "POSTGRES_PASSWORD"

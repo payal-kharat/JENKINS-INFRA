@@ -96,9 +96,14 @@ module "ECS_TASK_DEFINITIONS" {
   BACKEND_ADDRESS                   = var.BACKEND_ADDRESS
   MYSQL_DATABASE                    = var.MYSQL_DATABASE
   MYSQL_PASSWORD                    = var.MYSQL_PASSWORD
-  MYSQL_HOST                        = var.MYSQL_HOST
   MYSQL_USER                        = var.MYSQL_USER
   MYSQL_ROOT_PASSWORD               = var.MYSQL_ROOT_PASSWORD
+  DB_HOST                           = var.DB_HOST
+  DB_NAME                           =var.DB_NAME
+  DB_PASSWORD                       =var.DB_PASSWORD
+  DB_PORT                           =var.DB_PORT
+  DB_USER                           =var.DB_USER
+  #MYSQL_HOST                        = var.MYSQL_HOST
   # POSTGRES_PASSWORD               = var.POSTGRES_PASSWORD
 }
 
