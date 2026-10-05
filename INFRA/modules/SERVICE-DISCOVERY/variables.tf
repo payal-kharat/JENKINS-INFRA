@@ -16,3 +16,7 @@ variable "ENVIRONMENT" {
 variable "PROJECT_NAME" {
   type = string
 }
+variable "COMMON_TAGS" {
+  description = "Common tags for all resources"
+  type        = map(string)
+}

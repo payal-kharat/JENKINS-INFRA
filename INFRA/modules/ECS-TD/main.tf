@@ -4,8 +4,8 @@ resource "aws_ecs_task_definition" "backend" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.BACKEND_CPU
   memory                   = var.BACKEND_MEMORY
-  execution_role_arn = var.ECS_EXECUTION_ROLE_ARN
-  task_role_arn      = var.ECS_TASK_ROLE_ARN
+  execution_role_arn       = var.ECS_EXECUTION_ROLE_ARN
+  task_role_arn            = var.ECS_TASK_ROLE_ARN
   container_definitions = jsonencode([
     {
       name      = "backend"
@@ -36,31 +36,31 @@ resource "aws_ecs_task_definition" "backend" {
         #   name  = "MYSQL_USER"
         #   value = var.MYSQL_USER
         # }
-      #   {
-      #     name  = "PG_PASSWORD"
-      #     value = var.PG_PASSWORD
-      #   }
-      {
-          name = "DB_HOST"
+        #   {
+        #     name  = "PG_PASSWORD"
+        #     value = var.PG_PASSWORD
+        #   }
+        {
+          name  = "DB_HOST"
           value = var.DB_HOST
         },
         {
-          name = "DB_PORT"
+          name  = "DB_PORT"
           value = var.DB_PORT
         },
         {
-          name = "DB_USER"
+          name  = "DB_USER"
           value = var.DB_USER
         },
         {
-          name = "DB_PASSWORD"
+          name  = "DB_PASSWORD"
           value = var.DB_PASSWORD
         },
         {
-          name = "DB_NAME"
+          name  = "DB_NAME"
           value = var.DB_NAME
         }
-       ]
+      ]
       logConfiguration = {
         logDriver = "awslogs"
 
@@ -80,8 +80,8 @@ resource "aws_ecs_task_definition" "frontend" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.FRONTEND_CPU
   memory                   = var.FRONTEND_MEMORY
-  execution_role_arn = var.ECS_EXECUTION_ROLE_ARN
-  task_role_arn      = var.ECS_TASK_ROLE_ARN
+  execution_role_arn       = var.ECS_EXECUTION_ROLE_ARN
+  task_role_arn            = var.ECS_TASK_ROLE_ARN
   container_definitions = jsonencode([
     {
       name      = "frontend"
@@ -114,8 +114,8 @@ resource "aws_ecs_task_definition" "db" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.DB_CPU
   memory                   = var.DB_MEMORY
-  execution_role_arn = var.ECS_EXECUTION_ROLE_ARN
-  task_role_arn      = var.ECS_TASK_ROLE_ARN
+  execution_role_arn       = var.ECS_EXECUTION_ROLE_ARN
+  task_role_arn            = var.ECS_TASK_ROLE_ARN
   container_definitions = jsonencode([
     {
       name      = "db"
@@ -139,11 +139,11 @@ resource "aws_ecs_task_definition" "db" {
           value = var.MYSQL_ROOT_PASSWORD
         },
         {
-          name = "MYSQL_USER"
+          name  = "MYSQL_USER"
           value = var.MYSQL_USER
         },
         {
-          name = "MYSQL_PASSWORD"
+          name  = "MYSQL_PASSWORD"
           value = var.MYSQL_PASSWORD
         }
         # {

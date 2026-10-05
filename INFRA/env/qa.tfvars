@@ -1,5 +1,11 @@
-project_name = "app-3"
-environment  = "qa"
+# project_name = "app-3"
+# environment  = "qa"
+COMMON_TAGS = {
+  Project     = "app-3"
+  Environment = "qa"
+  ManagedBy   = "Terraform"
+  Owner       = "Payal"
+}
 
 vpc_cidr = "10.20.0.0/16"
 
@@ -72,13 +78,13 @@ DB_CONTAINER_PORT      = 3306
 
 BACKEND_ADDRESS = "0.0.0.0:8080"
 
-MYSQL_PASSWORD     = "rootpassword"
-MYSQL_HOST         = "app3-db.app3-dev.local"
-MYSQL_USER         = "root"
+MYSQL_PASSWORD = "rootpassword"
+MYSQL_HOST     = "app3-db.app3-dev.local"
+MYSQL_USER     = "root"
 # PG_PASSWORD = "CHANGE_ME"
 
-MYSQL_DATABASE          = "example"
-MYSQL_ROOT_PASSWORD     = "rootpassword"
+MYSQL_DATABASE      = "example"
+MYSQL_ROOT_PASSWORD = "rootpassword"
 # POSTGRES_PASSWORD = "CHANGE_ME"
 
 BACKEND_SERVICE_NAME  = "app-3-qa-backend-service"

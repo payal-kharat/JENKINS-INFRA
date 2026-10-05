@@ -308,3 +308,9 @@ variable "DB_CLIENT_ALIAS_PORT" {
 variable "ENABLE_EXECUTE_COMMAND" {
   type = bool
 }
+
+variable "COMMON_TAGS" {
+  description = "Common tags for all resources"
+  type        = map(string)
+  default = {}
+}

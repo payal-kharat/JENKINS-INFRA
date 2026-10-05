@@ -13,6 +13,11 @@ variable "environment" {
     error_message = "Environment must be dev, qa, uat, or prod."
   }
 }
+
+variable "COMMON_TAGS" {
+  description = "Common tags for all resources"
+  type        = map(string)
+}
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string

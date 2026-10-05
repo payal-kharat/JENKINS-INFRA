@@ -4,9 +4,10 @@ resource "aws_ecs_cluster" "main" {
     name  = "containerInsights"
     value = var.container_insights
   }
-  tags = {
-    Name        = var.ecs_cluster_name
-    Environment = var.environment
-    Project     = var.project_name
-  }
+  tags = merge(
+    var.COMMON_TAGS,
+    {
+      Name = var.ecs_cluster_name
+    }
+  )
 }
