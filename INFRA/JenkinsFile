@@ -36,36 +36,46 @@ pipeline {
         }
 
         stage('Terraform Init') {
-            steps {
-                dir('INFRA') {
-                    withCredentials([
-                        [$class: 'AmazonWebServicesCredentialsBinding',
-                         credentialsId: 'AWS']
-                    ]) {
-                        sh '''
-                            set -e
+    steps {
+        dir('INFRA') {
+            withCredentials([
+                [$class: 'AmazonWebServicesCredentialsBinding',
+                 credentialsId: 'AWS']
+            ]) {
+                sh '''
+                    set -e
 
-                            export AWS_DEFAULT_REGION="$AWS_REGION"
+                    export AWS_DEFAULT_REGION="$AWS_REGION"
 
-                            echo "Terraform environment: ${ENVIRONMENT}"
-                            echo "Terraform state key: employee-mgm/${ENVIRONMENT}/terraform.tfstate"
+                    if [ -z "$ENVIRONMENT" ]; then
+                        echo "ERROR: ENVIRONMENT is empty"
+                        exit 1
+                    fi
 
-                            if [ -z "$ENVIRONMENT" ]; then
-                                echo "ERROR: ENVIRONMENT is empty"
-                                exit 1
-                            fi
+                    STATE_KEY="employee-mgm/${ENVIRONMENT}/terraform.tfstate"
 
-                            rm -rf .terraform
+                    echo "=========================================="
+                    echo "Terraform Environment : ${ENVIRONMENT}"
+                    echo "Terraform State       : ${STATE_KEY}"
+                    echo "=========================================="
 
-                            terraform init \
-                                -input=false \
-                                -reconfigure \
-                                -backend-config="key=employee-mgm/${ENVIRONMENT}/terraform.tfstate"
-                        '''
-                    }
-                }
+                    rm -rf .terraform
+
+                    terraform init \
+                        -input=false \
+                        -reconfigure \
+                        -backend-config="key=${STATE_KEY}"
+
+                    echo "=========================================="
+                    echo "Terraform backend:"
+                    terraform state pull | head -c 500
+                    echo
+                    echo "=========================================="
+                '''
             }
         }
+    }
+}
 
         // stage('Terraform Validate') {
         //     steps {
