@@ -45,6 +45,9 @@ pipeline {
                         sh '''
                             export AWS_DEFAULT_REGION="$AWS_REGION"
                             terraform init
+
+                            terraform init -reconfigure \
+                            -backend-config="key=ecs-infrastructure/${params.Environment}/terraform.tfstate"
                         '''
                     }
                 }
