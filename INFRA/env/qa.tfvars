@@ -1,13 +1,13 @@
-project_name = "app-3"
+project_name = "employee-mgm"
 environment  = "qa"
 COMMON_TAGS = {
-  Project     = "app-3"
+  Project     = "employee-mgm"
   Environment = "qa"
   ManagedBy   = "Terraform"
   Owner       = "Payal"
 }
 
-vpc_cidr = "10.20.0.0/16"
+vpc_cidr = "10.10.0.0/16"
 
 availability_zones = [
   "us-east-1a",
@@ -15,39 +15,38 @@ availability_zones = [
 ]
 
 public_subnet_cidrs = [
-  "10.20.1.0/24",
-  "10.20.2.0/24"
+  "10.10.1.0/24",
+  "10.10.2.0/24"
 ]
 
 private_subnet_cidrs = [
-  "10.20.11.0/24",
-  "10.20.12.0/24"
+  "10.10.11.0/24",
+  "10.10.12.0/24"
 ]
 
-backend_ecr_repository_name  = "app-3-qa-backend"
-frontend_ecr_repository_name = "app-3-qa-frontend"
-db_ecr_repository_name       = "app-3-qa-db"
+backend_ecr_repository_name  = "employee-mgm-qa-backend"
+frontend_ecr_repository_name = "employee-mgm-qa-frontend"
+db_ecr_repository_name       = "employee-mgm-qa-db"
 
-ecs_execution_role_name = "app-3-qa-ecs-execution-role"
-ecs_task_role_name      = "app-3-qa-ecs-task-role"
+ecs_execution_role_name = "employee-mgm-qa-ecs-execution-role"
+ecs_task_role_name      = "employee-mgm-qa-ecs-task-role"
 
-backend_log_group_name  = "/ecs/app-3-qa-backend"
-frontend_log_group_name = "/ecs/app-3-qa-frontend"
-db_log_group_name       = "/ecs/app-3-qa-db"
+backend_log_group_name  = "/ecs/employee-mgm-qa-backend"
+frontend_log_group_name = "/ecs/employee-mgm-qa-frontend"
+db_log_group_name       = "/ecs/employee-mgm-qa-db"
 
 log_retention_days = 7
 
-ecs_cluster_name   = "app-3-qa-cluster"
+ecs_cluster_name   = "employee-mgm-qa-cluster"
 container_insights = "enabled"
 
+SERVICE_DISCOVERY_NAMESPACE_NAME = "emp-qa.local"
 
-SERVICE_DISCOVERY_NAMESPACE_NAME = "app3-qa.local"
+BACKEND_SERVICE_DISCOVERY_NAME = "emp-backend"
+DB_SERVICE_DISCOVERY_NAME      = "emp-db"
 
-BACKEND_SERVICE_DISCOVERY_NAME = "app3-backend"
-DB_SERVICE_DISCOVERY_NAME      = "app3-db"
-
-ALB_NAME                   = "app-3-qa-alb"
-FRONTEND_TARGET_GROUP_NAME = "app-3-qa-frontend-tg"
+ALB_NAME                   = "employee-mgm-qa-alb"
+FRONTEND_TARGET_GROUP_NAME = "employee-mgm-qa-frontend-tg"
 ALB_LISTENER_PORT          = 80
 FRONTEND_CONTAINER_PORT    = 80
 HEALTH_CHECK_PATH          = "/"
@@ -55,13 +54,13 @@ HEALTH_CHECK_PORT          = "traffic-port"
 
 AWS_REGION = "us-east-1"
 
-BACKEND_TASK_DEFINITION_FAMILY  = "app-3-qa-backend"
-FRONTEND_TASK_DEFINITION_FAMILY = "app-3-qa-frontend"
-DB_TASK_DEFINITION_FAMILY       = "app-3-qa-db"
+BACKEND_TASK_DEFINITION_FAMILY  = "employee-mgm-qa-backend"
+FRONTEND_TASK_DEFINITION_FAMILY = "employee-mgm-qa-frontend"
+DB_TASK_DEFINITION_FAMILY       = "employee-mgm-qa-db"
 
-BACKEND_IMAGE_URI  = "552940445807.dkr.ecr.us-east-1.amazonaws.com/app-3-qa-backend:latest"
-FRONTEND_IMAGE_URI = "552940445807.dkr.ecr.us-east-1.amazonaws.com/app-3-qa-frontend:latest"
-DB_IMAGE_URI       = "552940445807.dkr.ecr.us-east-1.amazonaws.com/app-3-qa-db:latest"
+BACKEND_IMAGE_URI  = "552940445807.dkr.ecr.us-east-1.amazonaws.com/employee-mgm-qa-backend:latest"
+FRONTEND_IMAGE_URI = "552940445807.dkr.ecr.us-east-1.amazonaws.com/employee-mgm-qa-frontend:latest"
+DB_IMAGE_URI       = "552940445807.dkr.ecr.us-east-1.amazonaws.com/employee-mgm-qa-db:latest"
 
 BACKEND_CPU    = 256
 BACKEND_MEMORY = 512
@@ -72,37 +71,46 @@ FRONTEND_MEMORY = 512
 DB_CPU    = 256
 DB_MEMORY = 512
 
-BACKEND_CONTAINER_PORT = 8080
+BACKEND_CONTAINER_PORT = 5000
 FRONTEND_CONT_PORT     = 80
 DB_CONTAINER_PORT      = 3306
 
-BACKEND_ADDRESS = "0.0.0.0:8080"
+BACKEND_ADDRESS = "0.0.0.0:5000"
+#app-3
+# MYSQL_PASSWORD     = "rootpassword"
+# MYSQL_HOST     = "app3-db.app3-qa.local"
+# MYSQL_USER     = "root"
 
-MYSQL_PASSWORD = "rootpassword"
-MYSQL_HOST     = "app3-db.app3-dev.local"
-MYSQL_USER     = "root"
-# PG_PASSWORD = "CHANGE_ME"
+#  MYSQL_DATABASE       = "example"
+#  MYSQL_ROOT_PASSWORD     = "rootpassword"
 
-MYSQL_DATABASE      = "example"
-MYSQL_ROOT_PASSWORD = "rootpassword"
-# POSTGRES_PASSWORD = "CHANGE_ME"
+#emp-mgm
+MYSQL_PASSWORD       = "employee123"
+MYSQL_USER           = "employee_user"
+MYSQL_DATABASE       = "employee_db"
+MYSQL_ROOT_PASSWORD  = "rootpassword"
 
-BACKEND_SERVICE_NAME  = "app-3-qa-backend-service"
-FRONTEND_SERVICE_NAME = "app-3-qa-frontend-service"
-DB_SERVICE_NAME       = "app-3-qa-db-service"
+DB_NAME              = "employee_db"
+DB_USER              = "employee_user"
+DB_PORT              = "3306"
+DB_PASSWORD          = "employee123"
+DB_HOST              = "emp-db.emp-qa.local"
+
+BACKEND_SERVICE_NAME  = "employee-mgm-qa-backend-service"
+FRONTEND_SERVICE_NAME = "employee-mgm-qa-frontend-service"
+DB_SERVICE_NAME       = "employee-mgm-qa-db-service"
 
 DESIRED_BACKEND_COUNT  = 1
 DESIRED_FRONTEND_COUNT = 1
 DESIRED_DB_COUNT       = 1
 
-BACKEND_DISCOVERY_NAME        = "app3-backend"
+BACKEND_DISCOVERY_NAME        = "employee-mgm-backend"
 BACKEND_PORT_NAME             = "backend"
-BACKEND_CLIENT_ALIAS_DNS_NAME = "app3-backend"
-BACKEND_CLIENT_ALIAS_PORT     = 8080
+BACKEND_CLIENT_ALIAS_DNS_NAME = "employee-mgm-backend"
+BACKEND_CLIENT_ALIAS_PORT     = 5000
 
-DB_DISCOVERY_NAME        = "app3-db"
+DB_DISCOVERY_NAME        = "employee-mgm-db"
 DB_PORT_NAME             = "db"
-DB_CLIENT_ALIAS_DNS_NAME = "app3-db"
+DB_CLIENT_ALIAS_DNS_NAME = "employee-mgm-db"
 DB_CLIENT_ALIAS_PORT     = 3306
 ENABLE_EXECUTE_COMMAND   = true
-
