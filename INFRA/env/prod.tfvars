@@ -1,5 +1,5 @@
-# project_name = "app-3"
-# environment  = "prod"
+project_name = "app-3"
+environment  = "prod"
 
 COMMON_TAGS = {
   Project     = "app-3"
