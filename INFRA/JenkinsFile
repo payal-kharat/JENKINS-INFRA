@@ -43,7 +43,19 @@ pipeline {
                          credentialsId: 'AWS']
                     ]) {
                         sh '''
+                            set -e
+
                             export AWS_DEFAULT_REGION="$AWS_REGION"
+
+                            echo "Terraform environment: ${ENVIRONMENT}"
+                            echo "Terraform state key: employee-mgm/${ENVIRONMENT}/terraform.tfstate"
+
+                            if [ -z "$ENVIRONMENT" ]; then
+                                echo "ERROR: ENVIRONMENT is empty"
+                                exit 1
+                            fi
+
+                            rm -rf .terraform
 
                             terraform init \
                                 -input=false \
@@ -80,6 +92,8 @@ pipeline {
                          credentialsId: 'AWS']
                     ]) {
                         sh '''
+                            set -e
+
                             export AWS_DEFAULT_REGION="$AWS_REGION"
 
                             terraform plan \
@@ -106,6 +120,8 @@ pipeline {
                          credentialsId: 'AWS']
                     ]) {
                         sh '''
+                            set -e
+
                             export AWS_DEFAULT_REGION="$AWS_REGION"
 
                             terraform apply \
@@ -132,6 +148,8 @@ pipeline {
                          credentialsId: 'AWS']
                     ]) {
                         sh '''
+                            set -e
+
                             export AWS_DEFAULT_REGION="$AWS_REGION"
 
                             echo "=========================================="
