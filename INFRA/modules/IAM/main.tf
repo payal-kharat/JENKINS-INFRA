@@ -22,3 +22,23 @@ resource "aws_iam_role" "ecs_task" {
   name               = var.ecs_task_role_name
   assume_role_policy = data.aws_iam_policy_document.ecs_task_assume_role.json
 }
+resource "aws_iam_role_policy" "ecs_exec" {
+  #name = "${var.APP_NAME}-${var.ENV}-ecs-exec-policy"
+  role = aws_iam_role.ecs_task_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ssmmessages:CreateControlChannel",
+          "ssmmessages:CreateDataChannel",
+          "ssmmessages:OpenControlChannel",
+          "ssmmessages:OpenDataChannel"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}

@@ -65,8 +65,12 @@ variable "DB_SERVICE_REGISTRY_ARN" {
 variable "DB_CONTAINER_NAME" {
   type = string
 }
+# variable "ENABLE_EXECUTE_COMMAND" {
+#   type = bool
+# }
 variable "ENABLE_EXECUTE_COMMAND" {
-  type = bool
+  type    = bool
+  default = true
 }
 variable "PROJECT_NAME" {
   type = string
