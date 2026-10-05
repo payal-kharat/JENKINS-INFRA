@@ -44,10 +44,11 @@ pipeline {
                     ]) {
                         sh '''
                             export AWS_DEFAULT_REGION="$AWS_REGION"
-                            terraform init
 
-                            terraform init -reconfigure \
-                            -backend-config="key=ecs-infrastructure/${params.Environment}/terraform.tfstate"
+                            terraform init \
+                                -input=false \
+                                -reconfigure \
+                                -backend-config="key=employee-mgm/${ENVIRONMENT}/terraform.tfstate"
                         '''
                     }
                 }
@@ -82,6 +83,7 @@ pipeline {
                             export AWS_DEFAULT_REGION="$AWS_REGION"
 
                             terraform plan \
+                                -input=false \
                                 -var-file="env/${ENVIRONMENT}.tfvars" \
                                 -out="tfplan-${ENVIRONMENT}"
                         '''
@@ -107,6 +109,8 @@ pipeline {
                             export AWS_DEFAULT_REGION="$AWS_REGION"
 
                             terraform apply \
+                                -input=false \
+                                -auto-approve \
                                 "tfplan-${ENVIRONMENT}"
                         '''
                     }
@@ -137,10 +141,13 @@ pipeline {
 
                             terraform plan \
                                 -destroy \
+                                -input=false \
                                 -var-file="env/${ENVIRONMENT}.tfvars" \
                                 -out="destroy-${ENVIRONMENT}"
 
                             terraform apply \
+                                -input=false \
+                                -auto-approve \
                                 "destroy-${ENVIRONMENT}"
                         '''
                     }
