@@ -57,9 +57,9 @@ BACKEND_TASK_DEFINITION_FAMILY  = "app-3-uat-backend"
 FRONTEND_TASK_DEFINITION_FAMILY = "app-3-uat-frontend"
 DB_TASK_DEFINITION_FAMILY       = "app-3-uat-db"
 
-BACKEND_IMAGE_URI  = "552940445807.dkr.ecr.us-east-1.amazonaws.com/app-3-uat-backend:latest"
-FRONTEND_IMAGE_URI = "552940445807.dkr.ecr.us-east-1.amazonaws.com/app-3-uat-frontend:latest"
-DB_IMAGE_URI       = "552940445807.dkr.ecr.us-east-1.amazonaws.com/app-3-uat-db:latest"
+BACKEND_IMAGE_URI  = "hasicorp/http-echo:1.0"
+FRONTEND_IMAGE_URI = "nginx:latest"
+DB_IMAGE_URI       = "mysql:8.0"
 
 BACKEND_CPU    = 256
 BACKEND_MEMORY = 512
