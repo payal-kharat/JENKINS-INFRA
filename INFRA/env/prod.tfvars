@@ -59,9 +59,9 @@ BACKEND_TASK_DEFINITION_FAMILY  = "app-3-prod-backend"
 FRONTEND_TASK_DEFINITION_FAMILY = "app-3-prod-frontend"
 DB_TASK_DEFINITION_FAMILY       = "app-3-prod-db"
 
-BACKEND_IMAGE_URI  = "552940445807.dkr.ecr.us-east-1.amazonaws.com/app-3-prod-backend:latest"
-FRONTEND_IMAGE_URI = "552940445807.dkr.ecr.us-east-1.amazonaws.com/app-3-prod-frontend:latest"
-DB_IMAGE_URI       = "552940445807.dkr.ecr.us-east-1.amazonaws.com/app-3-prod-db:latest"
+BACKEND_IMAGE_URI  = "hasicorp/http-echo:1.0"
+FRONTEND_IMAGE_URI = "nginx:latest"
+DB_IMAGE_URI       = "mysql:8.0"
 
 BACKEND_CPU    = 256
 BACKEND_MEMORY = 512
