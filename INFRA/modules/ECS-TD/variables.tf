@@ -100,7 +100,9 @@ variable "DB_NAME" {
   type = string
 }
 
-
+variable "BACKEND_HOST" {
+  type = string
+}
 
 # variable "POSTGRES_PASSWORD" {
 #   type      = string

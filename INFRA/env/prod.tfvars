@@ -28,6 +28,7 @@ private_subnet_cidrs = [
 backend_ecr_repository_name  = "app-3-prod-backend"
 frontend_ecr_repository_name = "app-3-prod-frontend"
 db_ecr_repository_name       = "app-3-prod-db"
+BACKEND_HOST                 = "emp-backend.emp-prod.local"
 
 ecs_execution_role_name = "app-3-prod-ecs-execution-role"
 ecs_task_role_name      = "app-3-prod-ecs-task-role"

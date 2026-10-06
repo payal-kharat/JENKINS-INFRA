@@ -27,6 +27,7 @@ private_subnet_cidrs = [
 backend_ecr_repository_name  = "employee-mgm-qa-backend"
 frontend_ecr_repository_name = "employee-mgm-qa-frontend"
 db_ecr_repository_name       = "employee-mgm-qa-db"
+BACKEND_HOST                 = "emp-backend.emp-qa.local"
 
 ecs_execution_role_name = "employee-mgm-qa-ecs-execution-role"
 ecs_task_role_name      = "employee-mgm-qa-ecs-task-role"

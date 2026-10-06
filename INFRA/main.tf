@@ -29,6 +29,9 @@ module "iam" {
   source                  = "./modules/IAM"
   ecs_execution_role_name = var.ecs_execution_role_name
   ecs_task_role_name      = var.ecs_task_role_name
+  # PROJECT_NAME = var.PROJECT_NAME
+  # ENV          = var.ENV
+  # DB_SECRET_ARN = module.DB_SECRETS.SECRET_ARN
 }
 
 module "cloudwatch_logs" {
@@ -108,6 +111,7 @@ module "ECS_TASK_DEFINITIONS" {
   DB_PASSWORD                     = var.DB_PASSWORD
   DB_PORT                         = var.DB_PORT
   DB_USER                         = var.DB_USER
+  BACKEND_HOST                    = var.BACKEND_HOST 
   #MYSQL_HOST                        = var.MYSQL_HOST
   # POSTGRES_PASSWORD               = var.POSTGRES_PASSWORD
 }
@@ -140,3 +144,15 @@ module "ECS_SERVICES" {
   ENVIRONMENT                  = var.environment
   COMMON_TAGS                  = var.COMMON_TAGS
 }
+
+# module "DB_SECRETS" {
+#   source = "./modules/SECRETS"
+
+#   PROJECT_NAME = var.PROJECT_NAME
+#   ENV          = var.ENV
+
+#   DB_NAME          = var.DB_NAME
+#   DB_USERNAME      = var.DB_USERNAME
+#   DB_PASSWORD      = var.DB_PASSWORD
+#   DB_ROOT_PASSWORD = var.DB_ROOT_PASSWORD
+# }

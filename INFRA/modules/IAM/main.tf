@@ -45,3 +45,26 @@ resource "aws_iam_role_policy" "ecs_exec" {
     ]
   })
 }
+
+# resource "aws_iam_role_policy" "ecs_secrets" {
+
+#   name = "${var.PROJECT_NAME}-${var.ENV}-ecs-secrets-policy"
+
+#   role = aws_iam_role.ecs_execution.id
+
+#   policy = jsonencode({
+#     Version = "2012-10-17"
+
+#     Statement = [
+#       {
+#         Effect = "Allow"
+
+#         Action = [
+#           "secretsmanager:GetSecretValue"
+#         ]
+
+#         Resource = module.DB_SECRETS.SECRET_ARN
+#       }
+#     ]
+#   })
+# }

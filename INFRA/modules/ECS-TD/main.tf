@@ -95,6 +95,12 @@ resource "aws_ecs_task_definition" "frontend" {
           protocol      = "tcp"
         }
       ]
+      environment = [
+  {
+    name  = "BACKEND_HOST"
+    value = var.BACKEND_HOST
+  }
+]
       logConfiguration = {
         logDriver = "awslogs"
 
