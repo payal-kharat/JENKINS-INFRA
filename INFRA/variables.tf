@@ -317,34 +317,3 @@ variable "COMMON_TAGS" {
 variable "BACKEND_HOST" {
   type = string
 }
-# SECRETS
-# variable "DB_NAME" {
-#   type = string
-# }
-
-# variable "DB_USERNAME" {
-#   type = string
-# }
-
-# variable "DB_PASSWORD" {
-#   type      = string
-#   sensitive = true
-# }
-
-# variable "DB_ROOT_PASSWORD" {
-#   type      = string
-#   sensitive = true
-# }
-
-# variable "PROJECT_NAME" {
-#   type = string
-# }
-
-# variable "ENV" {
-#   type = string
-# }
-
-# variable "DB_SECRET_ARN" {
-#   type = string
-# }
-
