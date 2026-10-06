@@ -63,8 +63,7 @@ pipeline {
                                 exit 1
                             fi
 
-                            BACKEND_CONFIG="backend_conf/backen_${ENVIRONMENT}.conf"
-                            STATE_KEY="app/${ENVIRONMENT}/terraform.tfstate"
+                            BACKEND_CONFIG="backend_conf/backend_${ENVIRONMENT}.conf"
 
                             if [ ! -f "$BACKEND_CONFIG" ]; then
                                 echo "ERROR: Backend configuration not found: $BACKEND_CONFIG"
@@ -79,7 +78,7 @@ pipeline {
                             echo "=========================================="
                             echo "Terraform Environment : ${ENVIRONMENT}"
                             echo "Terraform Backend     : ${BACKEND_CONFIG}"
-                            echo "Terraform State       : ${STATE_KEY}"
+                            echo "Terraform Variables   : env/${ENVIRONMENT}.tfvars"
                             echo "=========================================="
 
                             rm -rf .terraform
@@ -87,12 +86,10 @@ pipeline {
                             terraform init \
                                 -input=false \
                                 -reconfigure \
-                                -backend-config="${BACKEND_CONFIG}"
+                                -backend-config="$BACKEND_CONFIG"
 
                             echo "=========================================="
-                            echo "Terraform backend:"
-                            terraform state pull | head -c 500
-                            echo
+                            echo "Terraform backend initialized successfully"
                             echo "=========================================="
                         '''
                     }
