@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -35,58 +36,69 @@ pipeline {
             }
         }
 
-        stage('Terraform Init') {
-    steps {
-        dir('INFRA') {
-            withCredentials([
-                [$class: 'AmazonWebServicesCredentialsBinding',
-                 credentialsId: 'AWS']
-            ]) {
-                sh '''
-                    set -e
-
-                    export AWS_DEFAULT_REGION="$AWS_REGION"
-
-                    if [ -z "$ENVIRONMENT" ]; then
-                        echo "ERROR: ENVIRONMENT is empty"
-                        exit 1
-                    fi
-
-                    STATE_KEY="employee-mgm/${ENVIRONMENT}/terraform.tfstate"
-
-                    echo "=========================================="
-                    echo "Terraform Environment : ${ENVIRONMENT}"
-                    echo "Terraform State       : ${STATE_KEY}"
-                    echo "=========================================="
-
-                    rm -rf .terraform
-
-                    terraform init \
-                        -input=false \
-                        -reconfigure \
-                        -backend-config="key=${STATE_KEY}"
-
-                    echo "=========================================="
-                    echo "Terraform backend:"
-                    terraform state pull | head -c 500
-                    echo
-                    echo "=========================================="
-                '''
+        stage('Validate Parameters') {
+            steps {
+                script {
+                    if (params.APPLY && params.DESTROY) {
+                        error('APPLY and DESTROY cannot both be true. Select only one action.')
+                    }
+                }
             }
         }
-    }
-}
 
-        // stage('Terraform Validate') {
-        //     steps {
-        //         dir('INFRA') {
-        //             sh '''
-        //                 terraform fmt -check -recursive
-        //                 terraform validate
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Terraform Init') {
+            steps {
+                dir('INFRA') {
+                    withCredentials([
+                        [$class: 'AmazonWebServicesCredentialsBinding',
+                         credentialsId: 'AWS']
+                    ]) {
+                        sh '''
+                            set -e
+
+                            export AWS_DEFAULT_REGION="$AWS_REGION"
+
+                            if [ -z "$ENVIRONMENT" ]; then
+                                echo "ERROR: ENVIRONMENT is empty"
+                                exit 1
+                            fi
+
+                            BACKEND_CONFIG="backend_conf/backen_${ENVIRONMENT}.conf"
+                            STATE_KEY="app/${ENVIRONMENT}/terraform.tfstate"
+
+                            if [ ! -f "$BACKEND_CONFIG" ]; then
+                                echo "ERROR: Backend configuration not found: $BACKEND_CONFIG"
+                                exit 1
+                            fi
+
+                            if [ ! -f "env/${ENVIRONMENT}.tfvars" ]; then
+                                echo "ERROR: Terraform variable file not found: env/${ENVIRONMENT}.tfvars"
+                                exit 1
+                            fi
+
+                            echo "=========================================="
+                            echo "Terraform Environment : ${ENVIRONMENT}"
+                            echo "Terraform Backend     : ${BACKEND_CONFIG}"
+                            echo "Terraform State       : ${STATE_KEY}"
+                            echo "=========================================="
+
+                            rm -rf .terraform
+
+                            terraform init \
+                                -input=false \
+                                -reconfigure \
+                                -backend-config="${BACKEND_CONFIG}"
+
+                            echo "=========================================="
+                            echo "Terraform backend:"
+                            terraform state pull | head -c 500
+                            echo
+                            echo "=========================================="
+                        '''
+                    }
+                }
+            }
+        }
 
         stage('Terraform Plan') {
             when {
@@ -113,6 +125,21 @@ pipeline {
                         '''
                     }
                 }
+            }
+        }
+
+        stage('Manual Approval - Apply') {
+            when {
+                expression {
+                    return params.APPLY && !params.DESTROY && params.ENVIRONMENT != 'dev'
+                }
+            }
+
+            steps {
+                input(
+                    message: "Approve Terraform APPLY for ${params.ENVIRONMENT}?",
+                    ok: 'Approve Apply'
+                )
             }
         }
 
@@ -144,7 +171,7 @@ pipeline {
             }
         }
 
-        stage('Terraform Destroy') {
+        stage('Terraform Destroy Plan') {
             when {
                 expression {
                     return params.DESTROY
@@ -163,7 +190,7 @@ pipeline {
                             export AWS_DEFAULT_REGION="$AWS_REGION"
 
                             echo "=========================================="
-                            echo "WARNING: Terraform DESTROY"
+                            echo "WARNING: Terraform DESTROY PLAN"
                             echo "Environment: ${ENVIRONMENT}"
                             echo "=========================================="
 
@@ -172,6 +199,44 @@ pipeline {
                                 -input=false \
                                 -var-file="env/${ENVIRONMENT}.tfvars" \
                                 -out="destroy-${ENVIRONMENT}"
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Manual Approval - Destroy') {
+            when {
+                expression {
+                    return params.DESTROY
+                }
+            }
+
+            steps {
+                input(
+                    message: "WARNING: Approve Terraform DESTROY for ${params.ENVIRONMENT}?",
+                    ok: 'Approve Destroy'
+                )
+            }
+        }
+
+        stage('Terraform Destroy') {
+            when {
+                expression {
+                    return params.DESTROY
+                }
+            }
+
+            steps {
+                dir('INFRA') {
+                    withCredentials([
+                        [$class: 'AmazonWebServicesCredentialsBinding',
+                         credentialsId: 'AWS']
+                    ]) {
+                        sh '''
+                            set -e
+
+                            export AWS_DEFAULT_REGION="$AWS_REGION"
 
                             terraform apply \
                                 -input=false \
@@ -198,3 +263,4 @@ pipeline {
         }
     }
 }
+
