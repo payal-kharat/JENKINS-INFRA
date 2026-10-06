@@ -52,9 +52,9 @@ BACKEND_TASK_DEFINITION_FAMILY  = "employee-mgm-dev-backend"
 FRONTEND_TASK_DEFINITION_FAMILY = "employee-mgm-dev-frontend"
 DB_TASK_DEFINITION_FAMILY       = "employee-mgm-dev-db"
 
-BACKEND_IMAGE_URI  = "552940445807.dkr.ecr.us-east-1.amazonaws.com/employee-mgm-dev-backend:latest"
-FRONTEND_IMAGE_URI = "552940445807.dkr.ecr.us-east-1.amazonaws.com/employee-mgm-dev-frontend:latest"
-DB_IMAGE_URI       = "552940445807.dkr.ecr.us-east-1.amazonaws.com/employee-mgm-dev-db:latest"
+BACKEND_IMAGE_URI  = "hasicorp/http-echo:1.0"
+FRONTEND_IMAGE_URI = "nginx:latest"
+DB_IMAGE_URI       = "mysql:8.0"
 
 BACKEND_CPU    = 256
 BACKEND_MEMORY = 512
