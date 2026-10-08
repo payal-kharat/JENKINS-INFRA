@@ -2,7 +2,7 @@ resource "aws_service_discovery_private_dns_namespace" "main" {
 
   name = var.NAMESPACE_NAME
 
-  vpc  = var.VPC_ID
+  vpc = var.VPC_ID
 
   tags = merge(
     var.COMMON_TAGS,

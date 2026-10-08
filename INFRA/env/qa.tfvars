@@ -86,11 +86,11 @@ BACKEND_ADDRESS = "0.0.0.0:5000"
 #  MYSQL_ROOT_PASSWORD     = "rootpassword"
 
 #emp-mgm
-MYSQL_DATABASE      = "employee_db"
+MYSQL_DATABASE = "employee_db"
 
-DB_NAME     = "employee_db"
-DB_PORT     = "3306"
-DB_HOST     = "emp-db.emp-qa.local"
+DB_NAME = "employee_db"
+DB_PORT = "3306"
+DB_HOST = "emp-db.emp-qa.local"
 # MYSQL_USER          = "your-existing-mysql-user"
 # MYSQL_PASSWORD      = "your-existing-mysql-password"
 # MYSQL_ROOT_PASSWORD = "your-existing-mysql-root-password"
@@ -117,4 +117,4 @@ DB_PORT_NAME             = "db"
 DB_CLIENT_ALIAS_DNS_NAME = "employee-mgm-db"
 DB_CLIENT_ALIAS_PORT     = 3306
 ENABLE_EXECUTE_COMMAND   = true
-SECRET_NAME = "employee-mgm-qa-secrets"
+SECRET_NAME              = "employee-mgm-qa-secrets"

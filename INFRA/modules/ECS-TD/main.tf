@@ -61,16 +61,16 @@ resource "aws_ecs_task_definition" "backend" {
           value = var.DB_NAME
         }
       ]
-    secrets = [
-  {
-    name      = "DB_USER"
-    valueFrom = "${var.SECRET_ARN}:DB_USER::"
-  },
-  {
-    name      = "DB_PASSWORD"
-    valueFrom = "${var.SECRET_ARN}:DB_PASSWORD::"
-  }
-]
+      secrets = [
+        {
+          name      = "DB_USER"
+          valueFrom = "${var.SECRET_ARN}:DB_USER::"
+        },
+        {
+          name      = "DB_PASSWORD"
+          valueFrom = "${var.SECRET_ARN}:DB_PASSWORD::"
+        }
+      ]
       logConfiguration = {
         logDriver = "awslogs"
 
@@ -106,11 +106,11 @@ resource "aws_ecs_task_definition" "frontend" {
         }
       ]
       environment = [
-  {
-    name  = "BACKEND_HOST"
-    value = var.BACKEND_HOST
-  }
-]
+        {
+          name  = "BACKEND_HOST"
+          value = var.BACKEND_HOST
+        }
+      ]
       logConfiguration = {
         logDriver = "awslogs"
 
@@ -167,20 +167,20 @@ resource "aws_ecs_task_definition" "db" {
         #   value = var.POSTGRES_PASSWORD
         # }
       ]
-    secrets = [
-  {
-    name      = "MYSQL_USER"
-    valueFrom = "${var.SECRET_ARN}:MYSQL_USER::"
-  },
-  {
-    name      = "MYSQL_PASSWORD"
-    valueFrom = "${var.SECRET_ARN}:MYSQL_PASSWORD::"
-  },
-  {
-    name      = "MYSQL_ROOT_PASSWORD"
-    valueFrom = "${var.SECRET_ARN}:MYSQL_ROOT_PASSWORD::"
-  }
-]
+      secrets = [
+        {
+          name      = "MYSQL_USER"
+          valueFrom = "${var.SECRET_ARN}:MYSQL_USER::"
+        },
+        {
+          name      = "MYSQL_PASSWORD"
+          valueFrom = "${var.SECRET_ARN}:MYSQL_PASSWORD::"
+        },
+        {
+          name      = "MYSQL_ROOT_PASSWORD"
+          valueFrom = "${var.SECRET_ARN}:MYSQL_ROOT_PASSWORD::"
+        }
+      ]
       logConfiguration = {
         logDriver = "awslogs"
         options = {

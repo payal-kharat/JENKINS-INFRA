@@ -2,7 +2,7 @@ resource "aws_secretsmanager_secret" "employee_mgm" {
   name        = var.SECRET_NAME
   description = "Employee Management ${var.environment} database credentials"
   # force_delete_without_recovery = var.ENVIRONMENT == "dev"
-  recovery_window_in_days = var.environment == "dev" ? 0 : 1
+  recovery_window_in_days = 0 
   tags = var.COMMON_TAGS
 }
 
