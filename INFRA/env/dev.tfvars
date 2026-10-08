@@ -25,9 +25,7 @@ BACKEND_HOST                 = "emp-backend.emp-dev.local"
 
 ecs_execution_role_name = "employee-mgm-dev-ecs-execution-role"
 ecs_task_role_name      = "employee-mgm-dev-ecs-task-role"
-# PROJECT_NAME = "employee-mgm"
-# ENV          = "dev"
-# db_secret_name = "employee-mgm-dev-db-secret"
+
 
 backend_log_group_name  = "/ecs/employee-mgm-dev-backend"
 frontend_log_group_name = "/ecs/employee-mgm-dev-frontend"
@@ -79,21 +77,20 @@ BACKEND_ADDRESS = "0.0.0.0:5000"
 # MYSQL_PASSWORD     = "rootpassword"
 # MYSQL_HOST     = "app3-db.app3-dev.local"
 # MYSQL_USER     = "root"
-
 #  MYSQL_DATABASE       = "example"
 #  MYSQL_ROOT_PASSWORD     = "rootpassword"
 
 #emp-mgm
-MYSQL_PASSWORD      = "employee123"
-MYSQL_USER          = "employee_user"
 MYSQL_DATABASE      = "employee_db"
-MYSQL_ROOT_PASSWORD = "rootpassword"
-
 DB_NAME     = "employee_db"
-DB_USER     = "employee_user"
 DB_PORT     = "3306"
-DB_PASSWORD = "employee123"
 DB_HOST     = "emp-db.emp-dev.local"
+MYSQL_USER          = "your-existing-mysql-user"
+MYSQL_PASSWORD      = "your-existing-mysql-password"
+MYSQL_ROOT_PASSWORD = "your-existing-mysql-root-password"
+
+DB_USER     = "your-existing-db-user"
+DB_PASSWORD = "your-existing-db-password"
 
 BACKEND_SERVICE_NAME  = "employee-mgm-dev-backend-service"
 FRONTEND_SERVICE_NAME = "employee-mgm-dev-frontend-service"
@@ -113,4 +110,5 @@ DB_PORT_NAME             = "db"
 DB_CLIENT_ALIAS_DNS_NAME = "employee-mgm-db"
 DB_CLIENT_ALIAS_PORT     = 3306
 ENABLE_EXECUTE_COMMAND   = true
+SECRET_NAME = "employee-mgm-dev-secrets"
 

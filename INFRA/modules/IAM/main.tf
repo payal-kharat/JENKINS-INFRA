@@ -45,26 +45,28 @@ resource "aws_iam_role_policy" "ecs_exec" {
     ]
   })
 }
+resource "aws_iam_policy" "ecs_secrets" {
+  name = "${var.project_name}-${var.environment}-ecs-secrets-policy"
 
-# resource "aws_iam_role_policy" "ecs_secrets" {
+  policy = jsonencode({
+    Version = "2012-10-17"
 
-#   name = "${var.PROJECT_NAME}-${var.ENV}-ecs-secrets-policy"
+    Statement = [
+      {
+        Effect = "Allow"
 
-#   role = aws_iam_role.ecs_execution.id
+        Action = [
+          "secretsmanager:GetSecretValue"
+        ]
 
-#   policy = jsonencode({
-#     Version = "2012-10-17"
+        Resource = var.SECRET_ARN
+      }
+    ]
+  })
 
-#     Statement = [
-#       {
-#         Effect = "Allow"
-
-#         Action = [
-#           "secretsmanager:GetSecretValue"
-#         ]
-
-#         Resource = module.DB_SECRETS.SECRET_ARN
-#       }
-#     ]
-#   })
-# }
+  tags = var.COMMON_TAGS
+}
+resource "aws_iam_role_policy_attachment" "ecs_secrets" {
+  role       = aws_iam_role.ecs_execution.name
+  policy_arn = aws_iam_policy.ecs_secrets.arn
+}

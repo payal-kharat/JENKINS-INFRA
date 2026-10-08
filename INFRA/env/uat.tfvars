@@ -77,14 +77,17 @@ DB_CONTAINER_PORT      = 3306
 
 BACKEND_ADDRESS = "0.0.0.0:8080"
 
-MYSQL_PASSWORD = "rootpassword"
-MYSQL_HOST     = "app3-db.app3-dev.local"
-MYSQL_USER     = "root"
-# PG_PASSWORD = "CHANGE_ME"
+MYSQL_DATABASE      = "employee_db"
 
-MYSQL_DATABASE      = "example"
-MYSQL_ROOT_PASSWORD = "rootpassword"
-# POSTGRES_PASSWORD = "CHANGE_ME"
+DB_NAME     = "employee_db"
+DB_PORT     = "3306"
+DB_HOST     = "emp-db.emp-uat.local"
+MYSQL_USER          = "your-existing-mysql-user"
+MYSQL_PASSWORD      = "your-existing-mysql-password"
+MYSQL_ROOT_PASSWORD = "your-existing-mysql-root-password"
+
+DB_USER     = "your-existing-db-user"
+DB_PASSWORD = "your-existing-db-password"
 
 BACKEND_SERVICE_NAME  = "app-3-uat-backend-service"
 FRONTEND_SERVICE_NAME = "app-3-uat-frontend-service"
@@ -104,4 +107,5 @@ DB_PORT_NAME             = "db"
 DB_CLIENT_ALIAS_DNS_NAME = "app3-db"
 DB_CLIENT_ALIAS_PORT     = 3306
 ENABLE_EXECUTE_COMMAND   = true
+SECRET_NAME = "employee-mgm-uat-secrets"
 

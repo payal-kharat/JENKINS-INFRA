@@ -201,14 +201,17 @@ variable "BACKEND_ADDRESS" {
 # variable "MYSQL_DATABASE" {
 #   type = string
 # }
-
-variable "MYSQL_PASSWORD" {
-  type = string
-}
-
 # variable "MYSQL_HOST" {
 #   type = string
 # }
+variable "SECRET_NAME" {
+  type = string
+}
+
+variable "MYSQL_PASSWORD" {
+  type      = string
+  sensitive = true
+}
 
 variable "MYSQL_USER" {
   type      = string
@@ -216,7 +219,8 @@ variable "MYSQL_USER" {
 }
 
 variable "MYSQL_ROOT_PASSWORD" {
-  type = string
+  type      = string
+  sensitive = true
 }
 
 variable "MYSQL_DATABASE" {
@@ -234,10 +238,13 @@ variable "DB_PORT" {
   type = string
 }
 variable "DB_PASSWORD" {
-  type = string
+  type      = string
+  sensitive = true
 }
 variable "DB_USER" {
-  type = string
+  type      = string
+  sensitive = true
+
 }
 
 # variable "POSTGRES_PASSWORD" {
@@ -312,8 +319,9 @@ variable "ENABLE_EXECUTE_COMMAND" {
 variable "COMMON_TAGS" {
   description = "Common tags for all resources"
   type        = map(string)
-  default = {}
+  default     = {}
 }
 variable "BACKEND_HOST" {
   type = string
 }
+

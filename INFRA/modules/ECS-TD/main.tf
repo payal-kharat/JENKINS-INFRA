@@ -48,19 +48,29 @@ resource "aws_ecs_task_definition" "backend" {
           name  = "DB_PORT"
           value = var.DB_PORT
         },
-        {
-          name  = "DB_USER"
-          value = var.DB_USER
-        },
-        {
-          name  = "DB_PASSWORD"
-          value = var.DB_PASSWORD
-        },
+        # {
+        #   name  = "DB_USER"
+        #   value = var.DB_USER
+        # },
+        # {
+        #   name  = "DB_PASSWORD"
+        #   value = var.DB_PASSWORD
+        # },
         {
           name  = "DB_NAME"
           value = var.DB_NAME
         }
       ]
+    secrets = [
+  {
+    name      = "DB_USER"
+    valueFrom = "${var.SECRET_ARN}:DB_USER::"
+  },
+  {
+    name      = "DB_PASSWORD"
+    valueFrom = "${var.SECRET_ARN}:DB_PASSWORD::"
+  }
+]
       logConfiguration = {
         logDriver = "awslogs"
 
@@ -139,25 +149,38 @@ resource "aws_ecs_task_definition" "db" {
         {
           name  = "MYSQL_DATABASE"
           value = var.MYSQL_DATABASE
-        },
-        {
-          name  = "MYSQL_ROOT_PASSWORD"
-          value = var.MYSQL_ROOT_PASSWORD
-        },
-        {
-          name  = "MYSQL_USER"
-          value = var.MYSQL_USER
-        },
-        {
-          name  = "MYSQL_PASSWORD"
-          value = var.MYSQL_PASSWORD
         }
+        # {
+        #   name  = "MYSQL_ROOT_PASSWORD"
+        #   value = var.MYSQL_ROOT_PASSWORD
+        # },
+        # {
+        #   name  = "MYSQL_USER"
+        #   value = var.MYSQL_USER
+        # },
+        # {
+        #   name  = "MYSQL_PASSWORD"
+        #   value = var.MYSQL_PASSWORD
+        # }
         # {
         #   name  = "POSTGRES_PASSWORD"
         #   value = var.POSTGRES_PASSWORD
         # }
       ]
-
+    secrets = [
+  {
+    name      = "MYSQL_USER"
+    valueFrom = "${var.SECRET_ARN}:MYSQL_USER::"
+  },
+  {
+    name      = "MYSQL_PASSWORD"
+    valueFrom = "${var.SECRET_ARN}:MYSQL_PASSWORD::"
+  },
+  {
+    name      = "MYSQL_ROOT_PASSWORD"
+    valueFrom = "${var.SECRET_ARN}:MYSQL_ROOT_PASSWORD::"
+  }
+]
       logConfiguration = {
         logDriver = "awslogs"
         options = {

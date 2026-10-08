@@ -67,33 +67,36 @@ variable "BACKEND_ADDRESS" {
 # variable "MYSQL_DATABASE" {
 #   type = string
 # }
-variable "MYSQL_ROOT_PASSWORD" {
-  type = string
-}
 variable "MYSQL_DATABASE" {
   type = string
 }
-variable "MYSQL_PASSWORD" {
-  type      = string
-  sensitive = true
-}
+
+# variable "MYSQL_ROOT_PASSWORD" {
+#   type = string
+# }
+# variable "MYSQL_PASSWORD" {
+#   type      = string
+#   sensitive = true
+# }
+# variable "MYSQL_USER" {
+#   type = string
+# }
+
 # variable "MYSQL_HOST" {
 #   type = string
 # }
-variable "MYSQL_USER" {
-  type = string
-}
+
 #emp-backend
+# variable "DB_USER" {
+#   type = string
+# }
+# variable "DB_PASSWORD" {
+#   type = string
+# }
 variable "DB_HOST" {
   type = string
 }
-variable "DB_USER" {
-  type = string
-}
 variable "DB_PORT" {
-  type = string
-}
-variable "DB_PASSWORD" {
   type = string
 }
 variable "DB_NAME" {
@@ -101,6 +104,9 @@ variable "DB_NAME" {
 }
 
 variable "BACKEND_HOST" {
+  type = string
+}
+variable "SECRET_ARN" {
   type = string
 }
 
