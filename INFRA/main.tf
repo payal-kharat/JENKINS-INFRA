@@ -118,17 +118,24 @@ module "ECS_TASK_DEFINITIONS" {
   # POSTGRES_PASSWORD               = var.POSTGRES_PASSWORD
 }
 
-module "secrets_manager" {
-  source = "./modules/SECRETS-MANAGER"
+# module "secrets_manager" {
+#   source = "./modules/SECRETS-MANAGER"
 
-  SECRET_NAME         = var.SECRET_NAME
-  environment         = var.environment
-  COMMON_TAGS         = var.COMMON_TAGS
-  MYSQL_USER          = var.MYSQL_USER
-  MYSQL_PASSWORD      = var.MYSQL_PASSWORD
-  MYSQL_ROOT_PASSWORD = var.MYSQL_ROOT_PASSWORD
-  DB_USER             = var.DB_USER
-  DB_PASSWORD         = var.DB_PASSWORD
+#   SECRET_NAME         = var.SECRET_NAME
+#   environment         = var.environment
+#   COMMON_TAGS         = var.COMMON_TAGS
+#   MYSQL_USER          = var.MYSQL_USER
+#   MYSQL_PASSWORD      = var.MYSQL_PASSWORD
+#   MYSQL_ROOT_PASSWORD = var.MYSQL_ROOT_PASSWORD
+#   DB_USER             = var.DB_USER
+#   DB_PASSWORD         = var.DB_PASSWORD
+# }
+
+module "secrets_manager" {
+  source      = "./modules/SECRETS-MANAGER"
+  SECRET_NAME = var.SECRET_NAME
+  environment = var.environment
+  COMMON_TAGS = var.COMMON_TAGS
 }
 
 module "ECS_SERVICES" {

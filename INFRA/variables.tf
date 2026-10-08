@@ -208,20 +208,20 @@ variable "SECRET_NAME" {
   type = string
 }
 
-variable "MYSQL_PASSWORD" {
-  type      = string
-  sensitive = true
-}
+# variable "MYSQL_PASSWORD" {
+#   type      = string
+#   sensitive = true
+# }
 
-variable "MYSQL_USER" {
-  type      = string
-  sensitive = true
-}
+# variable "MYSQL_USER" {
+#   type      = string
+#   sensitive = true
+# }
 
-variable "MYSQL_ROOT_PASSWORD" {
-  type      = string
-  sensitive = true
-}
+# variable "MYSQL_ROOT_PASSWORD" {
+#   type      = string
+#   sensitive = true
+# }
 
 variable "MYSQL_DATABASE" {
   type = string
@@ -237,15 +237,14 @@ variable "DB_HOST" {
 variable "DB_PORT" {
   type = string
 }
-variable "DB_PASSWORD" {
-  type      = string
-  sensitive = true
-}
-variable "DB_USER" {
-  type      = string
-  sensitive = true
-
-}
+# variable "DB_PASSWORD" {
+#   type      = string
+#   sensitive = true
+# }
+# variable "DB_USER" {
+#   type      = string
+#   sensitive = true
+# }
 
 # variable "POSTGRES_PASSWORD" {
 #   type      = string
