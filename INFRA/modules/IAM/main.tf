@@ -1,3 +1,4 @@
+
 data "aws_iam_policy_document" "ecs_task_assume_role" {
   statement {
     effect = "Allow"
@@ -5,9 +6,7 @@ data "aws_iam_policy_document" "ecs_task_assume_role" {
       type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]
     }
-    actions = [
-      "sts:AssumeRole"
-    ]
+    actions = ["sts:AssumeRole"]
   }
 }
 
@@ -21,14 +20,32 @@ resource "aws_iam_role_policy_attachment" "ecs_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+resource "aws_iam_role_policy" "ecs_execution_secrets" {
+  name = "${var.project_name}-${var.environment}-ecs-execution-secrets"
+  role = aws_iam_role.ecs_execution.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue"
+        ]
+        Resource = var.SECRET_ARN
+      }
+    ]
+  })
+}
+
 resource "aws_iam_role" "ecs_task" {
   name               = var.ecs_task_role_name
   assume_role_policy = data.aws_iam_policy_document.ecs_task_assume_role.json
 }
 
 resource "aws_iam_role_policy" "ecs_exec" {
-  #name = "${var.APP_NAME}-${var.ENV}-ecs-exec-policy"
   role = aws_iam_role.ecs_task.id
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -45,28 +62,4 @@ resource "aws_iam_role_policy" "ecs_exec" {
     ]
   })
 }
-resource "aws_iam_policy" "ecs_secrets" {
-  name = "${var.project_name}-${var.environment}-ecs-secrets-policy"
 
-  policy = jsonencode({
-    Version = "2012-10-17"
-
-    Statement = [
-      {
-        Effect = "Allow"
-
-        Action = [
-          "secretsmanager:GetSecretValue"
-        ]
-
-        Resource = var.SECRET_ARN
-      }
-    ]
-  })
-
-  tags = var.COMMON_TAGS
-}
-resource "aws_iam_role_policy_attachment" "ecs_secrets" {
-  role       = aws_iam_role.ecs_execution.name
-  policy_arn = aws_iam_policy.ecs_secrets.arn
-}
