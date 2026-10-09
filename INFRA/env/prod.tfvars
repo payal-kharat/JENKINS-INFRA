@@ -1,8 +1,8 @@
-project_name = "app-3"
+project_name = "employee-mgm"
 environment  = "prod"
 
 COMMON_TAGS = {
-  Project     = "app-3"
+  Project     = "employee-mgm"
   Environment = "prod"
   ManagedBy   = "Terraform"
   Owner       = "Payal"
@@ -25,30 +25,30 @@ private_subnet_cidrs = [
   "10.40.12.0/24"
 ]
 
-backend_ecr_repository_name  = "app-3-prod-backend"
-frontend_ecr_repository_name = "app-3-prod-frontend"
-db_ecr_repository_name       = "app-3-prod-db"
+backend_ecr_repository_name  = "employee-mgm-prod-backend"
+frontend_ecr_repository_name = "employee-mgm-prod-frontend"
+db_ecr_repository_name       = "employee-mgm-prod-db"
 BACKEND_HOST                 = "emp-backend.emp-prod.local"
 
-ecs_execution_role_name = "app-3-prod-ecs-execution-role"
-ecs_task_role_name      = "app-3-prod-ecs-task-role"
+ecs_execution_role_name = "employee-mgm-prod-ecs-execution-role"
+ecs_task_role_name      = "employee-mgm-prod-ecs-task-role"
 
-backend_log_group_name  = "/ecs/app-3-prod-backend"
-frontend_log_group_name = "/ecs/app-3-prod-frontend"
-db_log_group_name       = "/ecs/app-3-prod-db"
+backend_log_group_name  = "/ecs/employee-mgm-prod-backend"
+frontend_log_group_name = "/ecs/employee-mgm-prod-frontend"
+db_log_group_name       = "/ecs/employee-mgm-prod-db"
 
 log_retention_days = 30
 
-ecs_cluster_name   = "app-3-prod-cluster"
+ecs_cluster_name   = "employee-mgm-prod-cluster"
 container_insights = "enabled"
 
-SERVICE_DISCOVERY_NAMESPACE_NAME = "app3-prod.local"
+SERVICE_DISCOVERY_NAMESPACE_NAME = "emp-prod.local"
 
-BACKEND_SERVICE_DISCOVERY_NAME = "app3-backend"
-DB_SERVICE_DISCOVERY_NAME      = "app3-db"
+BACKEND_SERVICE_DISCOVERY_NAME = "emp-backend"
+DB_SERVICE_DISCOVERY_NAME      = "emp-db"
 
-ALB_NAME                   = "app-3-prod-alb"
-FRONTEND_TARGET_GROUP_NAME = "app-3-prod-frontend-tg"
+ALB_NAME                   = "employee-mgm-prod-alb"
+FRONTEND_TARGET_GROUP_NAME = "employee-mgm-prod-frontend-tg"
 ALB_LISTENER_PORT          = 80
 FRONTEND_CONTAINER_PORT    = 80
 HEALTH_CHECK_PATH          = "/"
@@ -56,9 +56,9 @@ HEALTH_CHECK_PORT          = "traffic-port"
 
 AWS_REGION = "us-east-1"
 
-BACKEND_TASK_DEFINITION_FAMILY  = "app-3-prod-backend"
-FRONTEND_TASK_DEFINITION_FAMILY = "app-3-prod-frontend"
-DB_TASK_DEFINITION_FAMILY       = "app-3-prod-db"
+BACKEND_TASK_DEFINITION_FAMILY  = "employee-mgm-prod-backend"
+FRONTEND_TASK_DEFINITION_FAMILY = "employee-mgm-prod-frontend"
+DB_TASK_DEFINITION_FAMILY       = "employee-mgm-prod-db"
 
 BACKEND_IMAGE_URI  = "hasicorp/http-echo:1.0"
 FRONTEND_IMAGE_URI = "nginx:latest"
@@ -89,22 +89,22 @@ DB_PORT = "3306"
 # DB_PASSWORD = "your-existing-db-password"
 DB_HOST = "emp-db.emp-prod.local"
 
-BACKEND_SERVICE_NAME  = "app-3-prod-backend-service"
-FRONTEND_SERVICE_NAME = "app-3-prod-frontend-service"
-DB_SERVICE_NAME       = "app-3-prod-db-service"
+BACKEND_SERVICE_NAME  = "employee-mgm-prod-backend-service"
+FRONTEND_SERVICE_NAME = "employee-mgm-prod-frontend-service"
+DB_SERVICE_NAME       = "employee-mgm-prod-db-service"
 
 DESIRED_BACKEND_COUNT  = 1
 DESIRED_FRONTEND_COUNT = 1
 DESIRED_DB_COUNT       = 1
 
-BACKEND_DISCOVERY_NAME        = "app3-backend"
+BACKEND_DISCOVERY_NAME        = "employee-mgm-backend"
 BACKEND_PORT_NAME             = "backend"
-BACKEND_CLIENT_ALIAS_DNS_NAME = "app3-backend"
+BACKEND_CLIENT_ALIAS_DNS_NAME = "employee-mgm-backend"
 BACKEND_CLIENT_ALIAS_PORT     = 8080
 
-DB_DISCOVERY_NAME        = "app3-db"
+DB_DISCOVERY_NAME        = "employee-mgm-db"
 DB_PORT_NAME             = "db"
-DB_CLIENT_ALIAS_DNS_NAME = "app3-db"
+DB_CLIENT_ALIAS_DNS_NAME = "employee-mgm-db"
 DB_CLIENT_ALIAS_PORT     = 3306
 ENABLE_EXECUTE_COMMAND   = true
 SECRET_NAME              = "employee-mgm-prod-secrets"
